@@ -1,0 +1,106 @@
+Model                
+  Parameters         
+   M_0=10^8
+   eta_1 = 500
+   eta_2 = 1020
+   eta_3 = 1530
+   z = 120
+   a01 = 0
+   a02 = 900
+   a03=1600
+   a04=2400
+   t11=900
+   t12=720
+   t13=810
+   t21=850
+   t22=760
+   t23=850
+   t31=880
+   t32=740
+   t33=880
+   h12star=500
+   h13star=500
+   h14star=500
+   h22star=500
+   h23star=500
+   h24star=500
+   h32star=500
+   h33star=500
+   h34star=500
+   delta1=500
+   delta2=1000
+   delta3=1500
+   mu1=0.02
+   mu2=0.022
+   mu3=0.024
+   gamma1=3
+   gamma2=2
+   rho2=0.4
+   rho3=0.8
+   rho4=1.0
+
+  End Parameters     
+
+  Variables          
+   x[1] = 100, >= eta_1-delta1
+   x[2] = 200, >= eta_2-delta2
+   x[3] = -20, >= eta_3-delta3
+   ksi = 0
+
+   l12 = 0
+   h12 = 0
+   k12 = 0
+   l13 = 0
+   h13 = 0
+   k13 = 0
+   h14 = 0
+
+   l22 = 0
+   h22 = 0
+   k22 = 0
+   l23 = 0
+   h23 = 0
+   k23 = 0
+   h24 = 0
+
+   l32 = 0
+   h32 = 0
+   k32 = 0
+   l33 = 0
+   h33 = 0
+   k33 = 0
+   h34 = 0
+
+  End Variables      
+
+  Equations
+
+   l12 = (1+gamma1)*mu1*(delta1+x[1]+a01)
+   h12 = delta1+x[1]+t11-a02
+   k12 = gamma1*(1+gamma1)*mu2*h12+gamma2*rho2*l12
+   l13 = l12+(1+gamma1)*mu2*h12-rho2*l12
+   h13 = h12+k12+t12-(a03-a02)
+   k13 = gamma1*(1 + gamma1)*mu3*h13 + gamma2*rho3*l13
+   h14 = h13 + k13 + t13 - (a04 - a03)
+   l22=(1+gamma1)*mu1*(delta2+x[2]-delta1-x[1])
+   h22=delta2+x[2]+t21-(delta1+x[1]+t11)
+   k22=gamma1*(1+gamma1)*mu2*h22+gamma2*rho2*l22
+   l23=l22 + (1 + gamma1) * mu2 * h22 - rho2 * l22
+   h23=h22+k22+t22-(k12+t12)
+   k23=(gamma1*(1 + gamma1)*mu3*h23 + gamma2*rho3*l23)
+   h24=(h23 + k23 + t23 - (k13+t13))
+
+   l32=((1+gamma1)*mu1*(delta3+x[3]-delta2-x[2]))
+   h32=(delta3+x[3]+t31-(delta2+x[2]+t21))
+   k32=(gamma1*(1+gamma1)*mu2*h32+gamma2*rho2*l32)
+   l33=(l32+(1+gamma1)*mu2*h32-rho2*l32)
+   h33=(h32+k32+t32-(k22+t22))
+   k33=(gamma1*(1 + gamma1)*mu3*h33 + gamma2*rho3*l33)
+   h34=(h33 + k33 + t33 - (k23+t23))
+
+   ksi >= x[3] - z
+   ksi >= 0
+
+   minimize (1/(4*3))*((h12-h12star)**2+(h13-h13star)**2+(h14-h14star)**2+(h22-h22star)**2+(h23-h23star)**2+(h24-h24star)**2+(h32-h32star)**2+(h33-h33star)**2+(h34-h34star)**2)+M_0*ksi
+  End Equations      
+End Model            
