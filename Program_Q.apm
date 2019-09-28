@@ -75,27 +75,27 @@ Model
 
   Equations
 
-   l12 = (1+gamma1)*mu1*(delta1+x[1]+a01)
+   l12 = (1+mu1*gamma1)*mu1*(delta1+x[1]+a01)
    h12 = delta1+x[1]+t11-a02
-   k12 = gamma1*(1+gamma1)*mu2*h12+gamma2*rho2*l12
-   l13 = l12+(1+gamma1)*mu2*h12-rho2*l12
+   k12 = gamma1*(1+mu2*gamma1)*mu2*h12+gamma2*rho2*l12
+   l13 = l12+(1+mu2*gamma1)*mu2*h12-rho2*l12
    h13 = h12+k12+t12-(a03-a02)
-   k13 = gamma1*(1 + gamma1)*mu3*h13 + gamma2*rho3*l13
+   k13 = gamma1*(1 + mu3*gamma1)*mu3*h13 + gamma2*rho3*l13
    h14 = h13 + k13 + t13 - (a04 - a03)
-   l22=(1+gamma1)*mu1*(delta2+x[2]-delta1-x[1])
+   l22=(1+mu1*gamma1)*mu1*(delta2+x[2]-delta1-x[1])
    h22=delta2+x[2]+t21-(delta1+x[1]+t11)
-   k22=gamma1*(1+gamma1)*mu2*h22+gamma2*rho2*l22
-   l23=l22 + (1 + gamma1) * mu2 * h22 - rho2 * l22
+   k22=gamma1*(1+mu2*gamma1)*mu2*h22+gamma2*rho2*l22
+   l23=l22 + (1 + mu2*gamma1) * mu2 * h22 - rho2 * l22
    h23=h22+k22+t22-(k12+t12)
-   k23=(gamma1*(1 + gamma1)*mu3*h23 + gamma2*rho3*l23)
+   k23=(gamma1*(1 + mu3*gamma1)*mu3*h23 + gamma2*rho3*l23)
    h24=(h23 + k23 + t23 - (k13+t13))
 
-   l32=((1+gamma1)*mu1*(delta3+x[3]-delta2-x[2]))
+   l32=((1+mu1*gamma1)*mu1*(delta3+x[3]-delta2-x[2]))
    h32=(delta3+x[3]+t31-(delta2+x[2]+t21))
-   k32=(gamma1*(1+gamma1)*mu2*h32+gamma2*rho2*l32)
-   l33=(l32+(1+gamma1)*mu2*h32-rho2*l32)
+   k32=(gamma1*(1+mu2*gamma1)*mu2*h32+gamma2*rho2*l32)
+   l33=(l32+(1+mu2*gamma1)*mu2*h32-rho2*l32)
    h33=(h32+k32+t32-(k22+t22))
-   k33=(gamma1*(1 + gamma1)*mu3*h33 + gamma2*rho3*l33)
+   k33=(gamma1*(1 + mu3*gamma1)*mu3*h33 + gamma2*rho3*l33)
    h34=(h33 + k33 + t33 - (k23+t23))
 
    ksi >= x[3] - z
