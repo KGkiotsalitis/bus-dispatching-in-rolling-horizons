@@ -9,6 +9,10 @@ Model
    a02 = 900
    a03=1600
    a04=2400
+   k01=10
+   k02=10
+   k03=10
+   k04=10
    t11=900
    t12=720
    t13=810
@@ -50,52 +54,65 @@ Model
    l12 = 0
    h12 = 0
    k12 = 0
+   r12 = 0
    l13 = 0
    h13 = 0
    k13 = 0
+   r13 = 0
    h14 = 0
 
    l22 = 0
    h22 = 0
    k22 = 0
+   r22 = 0
    l23 = 0
    h23 = 0
    k23 = 0
+   r23 = 0
    h24 = 0
 
    l32 = 0
    h32 = 0
    k32 = 0
+   r32 = 0
    l33 = 0
    h33 = 0
    k33 = 0
+   r33 = 0
    h34 = 0
 
   End Variables      
 
   Equations
 
-   l12 = (1+mu1*gamma1)*mu1*(delta1+x[1]+a01)
+   l12 = (1+mu1*gamma1)*mu1*(delta1+x[1]-a01-k01)
    h12 = delta1+x[1]+t11-a02
-   k12 = gamma1*(1+mu2*gamma1)*mu2*h12+gamma2*rho2*l12
-   l13 = l12+(1+mu2*gamma1)*mu2*h12-rho2*l12
+   r12 = (1+mu2*gamma1)*mu2*(h12-k02)
+   k12 = gamma1*r12+gamma2*rho2*l12
+   l13 = l12+r12-rho2*l12
    h13 = h12+k12+t12-(a03-a02)
-   k13 = gamma1*(1 + mu3*gamma1)*mu3*h13 + gamma2*rho3*l13
+   r13 = (1 + mu3*gamma1)*mu3*(h13-k03)
+   k13 = gamma1*r13 + gamma2*rho3*l13
    h14 = h13 + k13 + t13 - (a04 - a03)
+
    l22=(1+mu1*gamma1)*mu1*(delta2+x[2]-delta1-x[1])
    h22=delta2+x[2]+t21-(delta1+x[1]+t11)
-   k22=gamma1*(1+mu2*gamma1)*mu2*h22+gamma2*rho2*l22
-   l23=l22 + (1 + mu2*gamma1) * mu2 * h22 - rho2 * l22
+   r22=(1+mu2*gamma1)*mu2*(h22-k12)
+   k22=gamma1*r22+gamma2*rho2*l22
+   l23=l22 + r22 - rho2 * l22
    h23=h22+k22+t22-(k12+t12)
-   k23=(gamma1*(1 + mu3*gamma1)*mu3*h23 + gamma2*rho3*l23)
+   r23=(1 + mu3*gamma1)*mu3*(h23-k13)
+   k23=(gamma1*r23 + gamma2*rho3*l23)
    h24=(h23 + k23 + t23 - (k13+t13))
 
    l32=((1+mu1*gamma1)*mu1*(delta3+x[3]-delta2-x[2]))
    h32=(delta3+x[3]+t31-(delta2+x[2]+t21))
-   k32=(gamma1*(1+mu2*gamma1)*mu2*h32+gamma2*rho2*l32)
-   l33=(l32+(1+mu2*gamma1)*mu2*h32-rho2*l32)
+   r32=(1+mu2*gamma1)*mu2*(h32-k22)
+   k32=(gamma1*r32+gamma2*rho2*l32)
+   l33=(l32+r32-rho2*l32)
    h33=(h32+k32+t32-(k22+t22))
-   k33=(gamma1*(1 + mu3*gamma1)*mu3*h33 + gamma2*rho3*l33)
+   r33=(1 + mu3*gamma1)*mu3*(h33-k23)
+   k33=(gamma1*r33 + gamma2*rho3*l33)
    h34=(h33 + k33 + t33 - (k23+t23))
 
    ksi >= x[3] - z
